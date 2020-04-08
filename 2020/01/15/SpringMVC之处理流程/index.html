@@ -6,20 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Hello World | luolei</title>
+  <title>SpringMVC之处理流程 | luolei</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+  <meta name="description" content="SpringMVC">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2020/04/06/hello-world/index.html">
+<meta property="og:title" content="SpringMVC之处理流程">
+<meta property="og:url" content="http://yoursite.com/2020/01/15/SpringMVC%E4%B9%8B%E5%A4%84%E7%90%86%E6%B5%81%E7%A8%8B/index.html">
 <meta property="og:site_name" content="luolei">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="SpringMVC">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-04-06T07:44:41.054Z">
-<meta property="article:modified_time" content="2020-04-07T07:16:24.905Z">
+<meta property="og:image" content="https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1586331344&di=a23e17020b86821804bfdd43a0f8e1d0&src=http://www.pianshen.com/images/607/89bd4cecca8748b6505944f74df744a7.png">
+<meta property="article:published_time" content="2020-01-15T11:20:00.000Z">
+<meta property="article:modified_time" content="2020-04-08T07:37:34.603Z">
 <meta property="article:author" content="ShowLo0.0">
 <meta property="article:tag" content="随笔">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1586331344&di=a23e17020b86821804bfdd43a0f8e1d0&src=http://www.pianshen.com/images/607/89bd4cecca8748b6505944f74df744a7.png">
   
     <link rel="alternative" href="/atom.xml" title="luolei" type="application/atom+xml">
   
@@ -70,10 +72,6 @@
     		
     			
     			<a q-on="click: openSlider(e, 'innerArchive')" href="javascript:void(0)">所有文章</a>
-    			
-            
-    			
-    			<a q-on="click: openSlider(e, 'friends')" href="javascript:void(0)">友链</a>
     			
             
     			
@@ -164,39 +162,46 @@
           </div>
           <div id="js-content" class="content-ll">
             
-<article id="post-hello-world" class="article article-type-post " itemscope itemprop="blogPost">
+<article id="post-SpringMVC之处理流程" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Hello World
+      SpringMVC之处理流程
     </h1>
   
 
         
-        <a href="/2020/04/06/hello-world/" class="archive-article-date">
-  	<time datetime="2020-04-06T07:44:41.054Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-06</time>
+        <a href="/2020/01/15/SpringMVC%E4%B9%8B%E5%A4%84%E7%90%86%E6%B5%81%E7%A8%8B/" class="archive-article-date">
+  	<time datetime="2020-01-15T11:20:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-15</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+        <h1 id="SpringMVC"><a href="#SpringMVC" class="headerlink" title="SpringMVC"></a>SpringMVC</h1><a id="more"></a>
+<hr>
+<p>之前在学servlet时写过JavaWeb与Asp.net工作原理比较分析，那篇主要是大致描述了下servlet的工作流程,今天在家了解了下springmvc的工作原理,与asp.net中的mvc进行了一下比较asp.net MVC 的处理流程，思想都是差不多，都是通过一个url怎么映射到类中做完处理返回浏览器的过程，首先要解决三大问题,一是url映射转换成request和response对象的问题二是浏览器与服务端的数据交互问题三是服务端的request、response怎么响应给客户端。今天了解了下它的运行流畅,其实网上也有好多教程</p>
+<p>一图顶千言万语，用数据、用图说话,下图是springmvc的工作原理图</p>
+<p><img src="https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1586331344&di=a23e17020b86821804bfdd43a0f8e1d0&src=http://www.pianshen.com/images/607/89bd4cecca8748b6505944f74df744a7.png" alt="原理图"> </p>
+<h3 id="SpringMVC工作流程"><a href="#SpringMVC工作流程" class="headerlink" title="SpringMVC工作流程"></a>SpringMVC工作流程</h3><h4 id="一、-用户发送请求至前端控制器DispatcherServlet。"><a href="#一、-用户发送请求至前端控制器DispatcherServlet。" class="headerlink" title="一、  用户发送请求至前端控制器DispatcherServlet。"></a>一、  用户发送请求至前端控制器DispatcherServlet。</h4><pre><code>1.DispatcherServlet它也是servlet,load-on-startup=1,tomcat启动时它也会初始化,初始化参数是contextConfigLocation上下文配置文件位置,参数值就是JavaWeb之Eclipse中使用Maven构建SpringMVC项目  配置的spring-mvc。在spring-mvc中可以配置自动扫描包名、默认注解映射支持、视图解释类、拦截器、对静态资源文件的访问等信息，通过自动扫描包名、注解映射支持、静态资源访问这些配置的信息在就会实例化HandlerMapping对象。这些对象是在tomcat进行参数初始化的时候也会实例化完成。在DispatcherServlet中维护着一个表,类似C#MVC中的RouteTable 路由表,存放的是HandlerMapping对象list.下面截图是DispatcherServlet中的部分代码,在DispatcherServlet中维护着handerMappings、handerAdapters等对象列表。在initStrategies中对上面的一些属性进行初始化。</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">protected void initStrategies(ApplicationContext context) &#123;</span><br><span class="line">        initMultipartResolver(context);</span><br><span class="line">        initLocaleResolver(context);</span><br><span class="line">        initThemeResolver(context);</span><br><span class="line">        initHandlerMappings(context);</span><br><span class="line">        initHandlerAdapters(context);</span><br><span class="line">        initHandlerExceptionResolvers(context);</span><br><span class="line">        initRequestToViewNameTranslator(context);</span><br><span class="line">        initViewResolvers(context);</span><br><span class="line">        initFlashMapManager(context);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<pre><code>2.客户端发出请求，由 Tomcat 接收到这个请求，如果匹配 DispatcherServlet 在 web.xml 中配置的映射路径，Tomcat 就将请求转交给 DispatcherServlet 处理</code></pre><h4 id="二、-DispatcherServlet收到请求调用HandlerMapping处理器映射器。"><a href="#二、-DispatcherServlet收到请求调用HandlerMapping处理器映射器。" class="headerlink" title="二、  DispatcherServlet收到请求调用HandlerMapping处理器映射器。"></a>二、  DispatcherServlet收到请求调用HandlerMapping处理器映射器。</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line">protected void doDispatch(HttpServletRequest request, HttpServletResponse response) throws Exception &#123;</span><br><span class="line">       HttpServletRequest processedRequest &#x3D; request;</span><br><span class="line">       HandlerExecutionChain mappedHandler &#x3D; null;</span><br><span class="line">       boolean multipartRequestParsed &#x3D; false;</span><br><span class="line"></span><br><span class="line">       WebAsyncManager asyncManager &#x3D; WebAsyncUtils.getAsyncManager(request);</span><br><span class="line"></span><br><span class="line">       try &#123;</span><br><span class="line">           ModelAndView mv &#x3D; null;</span><br><span class="line">           Exception dispatchException &#x3D; null;</span><br><span class="line"></span><br><span class="line">           try &#123;</span><br><span class="line">               processedRequest &#x3D; checkMultipart(request);</span><br><span class="line">               multipartRequestParsed &#x3D; (processedRequest !&#x3D; request);</span><br><span class="line"></span><br><span class="line">               &#x2F;&#x2F; Determine handler for the current request.</span><br><span class="line">               mappedHandler &#x3D; getHandler(processedRequest);</span><br><span class="line">               if (mappedHandler &#x3D;&#x3D; null) &#123;</span><br><span class="line">                   noHandlerFound(processedRequest, response);</span><br><span class="line">                   return;</span><br><span class="line">               &#125;</span><br><span class="line"></span><br><span class="line">               &#x2F;&#x2F; Determine handler adapter for the current request.</span><br><span class="line">               HandlerAdapter ha &#x3D; getHandlerAdapter(mappedHandler.getHandler());</span><br><span class="line"></span><br><span class="line">               &#x2F;&#x2F; Process last-modified header, if supported by the handler.</span><br><span class="line">               String method &#x3D; request.getMethod();</span><br><span class="line">               boolean isGet &#x3D; &quot;GET&quot;.equals(method);</span><br><span class="line">               if (isGet || &quot;HEAD&quot;.equals(method)) &#123;</span><br><span class="line">                   long lastModified &#x3D; ha.getLastModified(request, mappedHandler.getHandler());</span><br><span class="line">                   if (logger.isDebugEnabled()) &#123;</span><br><span class="line">                       logger.debug(&quot;Last-Modified value for [&quot; + getRequestUri(request) + &quot;] is: &quot; + lastModified);</span><br><span class="line">                   &#125;</span><br><span class="line">                   if (new ServletWebRequest(request, response).checkNotModified(lastModified) &amp;&amp; isGet) &#123;</span><br><span class="line">                       return;</span><br><span class="line">                   &#125;</span><br><span class="line">               &#125;</span><br><span class="line"></span><br><span class="line">               if (!mappedHandler.applyPreHandle(processedRequest, response)) &#123;</span><br><span class="line">                   return;</span><br><span class="line">               &#125;</span><br><span class="line"></span><br><span class="line">               &#x2F;&#x2F; Actually invoke the handler.</span><br><span class="line">               mv &#x3D; ha.handle(processedRequest, response, mappedHandler.getHandler());</span><br><span class="line"></span><br><span class="line">               if (asyncManager.isConcurrentHandlingStarted()) &#123;</span><br><span class="line">                   return;</span><br><span class="line">               &#125;</span><br><span class="line"></span><br><span class="line">               applyDefaultViewName(processedRequest, mv);</span><br><span class="line">               mappedHandler.applyPostHandle(processedRequest, response, mv);</span><br><span class="line">           &#125;</span><br><span class="line">           catch (Exception ex) &#123;</span><br><span class="line">               dispatchException &#x3D; ex;</span><br><span class="line">           &#125;</span><br><span class="line">           catch (Throwable err) &#123;</span><br><span class="line">               &#x2F;&#x2F; As of 4.3, we&#39;re processing Errors thrown from handler methods as well,</span><br><span class="line">               &#x2F;&#x2F; making them available for @ExceptionHandler methods and other scenarios.</span><br><span class="line">               dispatchException &#x3D; new NestedServletException(&quot;Handler dispatch failed&quot;, err);</span><br><span class="line">           &#125;</span><br><span class="line">           processDispatchResult(processedRequest, response, mappedHandler, mv, dispatchException);</span><br><span class="line">       &#125;</span><br><span class="line">       catch (Exception ex) &#123;</span><br><span class="line">           triggerAfterCompletion(processedRequest, response, mappedHandler, ex);</span><br><span class="line">       &#125;</span><br><span class="line">       catch (Throwable err) &#123;</span><br><span class="line">           triggerAfterCompletion(processedRequest, response, mappedHandler,</span><br><span class="line">                   new NestedServletException(&quot;Handler processing failed&quot;, err));</span><br><span class="line">       &#125;</span><br><span class="line">       finally &#123;</span><br><span class="line">           if (asyncManager.isConcurrentHandlingStarted()) &#123;</span><br><span class="line">               &#x2F;&#x2F; Instead of postHandle and afterCompletion</span><br><span class="line">               if (mappedHandler !&#x3D; null) &#123;</span><br><span class="line">                   mappedHandler.applyAfterConcurrentHandlingStarted(processedRequest, response);</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">           else &#123;</span><br><span class="line">               &#x2F;&#x2F; Clean up any resources used by a multipart request.</span><br><span class="line">               if (multipartRequestParsed) &#123;</span><br><span class="line">                   cleanupMultipart(processedRequest);</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>上面的代码是核心代码，其实下面的几项其实就是代码的说明.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">processedRequest &#x3D; checkMultipart(request);</span><br><span class="line">multipartRequestParsed &#x3D; (processedRequest !&#x3D; request);</span><br></pre></td></tr></table></figure>
+<p>上面这两句是判断请求是不是上传文件的请求</p>
+<h4 id="三、-处理器映射器找到具体的处理器-可以根据xml配置、注解进行查找-，生成处理器对象及处理器拦截器-如果有则生成-一并返回给DispatcherServlet。"><a href="#三、-处理器映射器找到具体的处理器-可以根据xml配置、注解进行查找-，生成处理器对象及处理器拦截器-如果有则生成-一并返回给DispatcherServlet。" class="headerlink" title="三、   处理器映射器找到具体的处理器(可以根据xml配置、注解进行查找)，生成处理器对象及处理器拦截器(如果有则生成)一并返回给DispatcherServlet。"></a>三、   处理器映射器找到具体的处理器(可以根据xml配置、注解进行查找)，生成处理器对象及处理器拦截器(如果有则生成)一并返回给DispatcherServlet。</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> mappedHandler &#x3D; getHandler(processedRequest);</span><br><span class="line">if (mappedHandler &#x3D;&#x3D; null) &#123;</span><br><span class="line">    noHandlerFound(processedRequest, response);</span><br><span class="line">    return;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+<p>getHander返回的是一个HandlerExecutionChain,这个HandlerExecutionChain中包含一个handler和多个HandlerInterceptor(拦截器),这个和asp.net中的管道模型有点类似，一个httphandler和多个httpmodule,httpmodule也是用来做拦截操作的。同时要留意HandlerExecutionChain是通过HandlerMapping对象的getHandler获取的.其实这里还可以扩展比如拦截器的使用、HandlerMapping的介绍等,由于篇幅有限，会在以后的博客中一个一个的介绍。</p>
+<h4 id="四、-DispatcherServlet调用HandlerAdapter处理器适配器。"><a href="#四、-DispatcherServlet调用HandlerAdapter处理器适配器。" class="headerlink" title="四、  DispatcherServlet调用HandlerAdapter处理器适配器。"></a>四、  DispatcherServlet调用HandlerAdapter处理器适配器。</h4><p><code>HandlerAdapter ha = getHandlerAdapter(mappedHandler.getHandler());</code><br>获取适配器是通过遍历handlerAdapters列表找的,HandlerAdapter包含了3个方法.boolean supports(Object handler);ModelAndView handle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception;long getLastModified(HttpServletRequest request, Object handler);</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;*</span><br><span class="line"> * Copyright 2002-2013 the original author or authors.</span><br><span class="line"> *</span><br><span class="line"> * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span><br><span class="line"> * you may not use this file except in compliance with the License.</span><br><span class="line"> * You may obtain a copy of the License at</span><br><span class="line"> *</span><br><span class="line"> *      http:&#x2F;&#x2F;www.apache.org&#x2F;licenses&#x2F;LICENSE-2.0</span><br><span class="line"> *</span><br><span class="line"> * Unless required by applicable law or agreed to in writing, software</span><br><span class="line"> * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span><br><span class="line"> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span><br><span class="line"> * See the License for the specific language governing permissions and</span><br><span class="line"> * limitations under the License.</span><br><span class="line"> *&#x2F;</span><br><span class="line"></span><br><span class="line">package org.springframework.web.servlet;</span><br><span class="line"></span><br><span class="line">import javax.servlet.http.HttpServletRequest;</span><br><span class="line">import javax.servlet.http.HttpServletResponse;</span><br><span class="line"></span><br><span class="line">import org.springframework.lang.Nullable;</span><br><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line"> * MVC framework SPI, allowing parameterization of the core MVC workflow.</span><br><span class="line"> *</span><br><span class="line"> * &lt;p&gt;Interface that must be implemented for each handler type to handle a request.</span><br><span class="line"> * This interface is used to allow the &#123;@link DispatcherServlet&#125; to be indefinitely</span><br><span class="line"> * extensible. The &#123;@code DispatcherServlet&#125; accesses all installed handlers through</span><br><span class="line"> * this interface, meaning that it does not contain code specific to any handler type.</span><br><span class="line"> *</span><br><span class="line"> * &lt;p&gt;Note that a handler can be of type &#123;@code Object&#125;. This is to enable</span><br><span class="line"> * handlers from other frameworks to be integrated with this framework without</span><br><span class="line"> * custom coding, as well as to allow for annotation-driven handler objects that</span><br><span class="line"> * do not obey any specific Java interface.</span><br><span class="line"> *</span><br><span class="line"> * &lt;p&gt;This interface is not intended for application developers. It is available</span><br><span class="line"> * to handlers who want to develop their own web workflow.</span><br><span class="line"> *</span><br><span class="line"> * &lt;p&gt;Note: &#123;@code HandlerAdapter&#125; implementors may implement the &#123;@link</span><br><span class="line"> * org.springframework.core.Ordered&#125; interface to be able to specify a sorting</span><br><span class="line"> * order (and thus a priority) for getting applied by the &#123;@code DispatcherServlet&#125;.</span><br><span class="line"> * Non-Ordered instances get treated as lowest priority.</span><br><span class="line"> *</span><br><span class="line"> * @author Rod Johnson</span><br><span class="line"> * @author Juergen Hoeller</span><br><span class="line"> * @see org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter</span><br><span class="line"> * @see org.springframework.web.servlet.handler.SimpleServletHandlerAdapter</span><br><span class="line"> *&#x2F;</span><br><span class="line">public interface HandlerAdapter &#123;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * Given a handler instance, return whether or not this &#123;@code HandlerAdapter&#125;</span><br><span class="line">     * can support it. Typical HandlerAdapters will base the decision on the handler</span><br><span class="line">     * type. HandlerAdapters will usually only support one handler type each.</span><br><span class="line">     * &lt;p&gt;A typical implementation:</span><br><span class="line">     * &lt;p&gt;&#123;@code</span><br><span class="line">     * return (handler instanceof MyHandler);</span><br><span class="line">     * &#125;</span><br><span class="line">     * @param handler handler object to check</span><br><span class="line">     * @return whether or not this object can use the given handler</span><br><span class="line">     *&#x2F;</span><br><span class="line">    boolean supports(Object handler);</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * Use the given handler to handle this request.</span><br><span class="line">     * The workflow that is required may vary widely.</span><br><span class="line">     * @param request current HTTP request</span><br><span class="line">     * @param response current HTTP response</span><br><span class="line">     * @param handler handler to use. This object must have previously been passed</span><br><span class="line">     * to the &#123;@code supports&#125; method of this interface, which must have</span><br><span class="line">     * returned &#123;@code true&#125;.</span><br><span class="line">     * @throws Exception in case of errors</span><br><span class="line">     * @return ModelAndView object with the name of the view and the required</span><br><span class="line">     * model data, or &#123;@code null&#125; if the request has been handled directly</span><br><span class="line">     *&#x2F;</span><br><span class="line">    @Nullable</span><br><span class="line">    ModelAndView handle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * Same contract as for HttpServlet&#39;s &#123;@code getLastModified&#125; method.</span><br><span class="line">     * Can simply return -1 if there&#39;s no support in the handler class.</span><br><span class="line">     * @param request current HTTP request</span><br><span class="line">     * @param handler handler to use</span><br><span class="line">     * @return the lastModified value for the given handler</span><br><span class="line">     * @see javax.servlet.http.HttpServlet#getLastModified</span><br><span class="line">     * @see org.springframework.web.servlet.mvc.LastModified#getLastModified</span><br><span class="line">     *&#x2F;</span><br><span class="line">    long getLastModified(HttpServletRequest request, Object handler);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="五、-HandlerAdapter经过适配调用具体的处理器-Controller，也叫后端控制器-。"><a href="#五、-HandlerAdapter经过适配调用具体的处理器-Controller，也叫后端控制器-。" class="headerlink" title="五、  HandlerAdapter经过适配调用具体的处理器(Controller，也叫后端控制器)。"></a>五、  HandlerAdapter经过适配调用具体的处理器(Controller，也叫后端控制器)。</h4><h4 id="六、-Controller执行完成返回ModelAndView。"><a href="#六、-Controller执行完成返回ModelAndView。" class="headerlink" title="六、  Controller执行完成返回ModelAndView。"></a>六、  Controller执行完成返回ModelAndView。</h4><hr>
+<p>最近有点忙<br>之后慢慢更新后续………</p>
 
       
 
@@ -298,7 +303,7 @@
   <p>扫一扫，分享到微信</p>
   <div class="wx-qrcode">
     <img
-      src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://luolei-1005.github.io/2020/04/06/hello-world/"
+      src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://luolei-1005.github.io/2020/01/15/SpringMVC%E4%B9%8B%E5%A4%84%E7%90%86%E6%B5%81%E7%A8%8B/"
       alt="微信分享二维码">
   </div>
 </div>
@@ -312,6 +317,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2020/01/25/Vue%E5%85%A5%E9%97%A8/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Vue.js 事件处理器
+        
+      </div>
+    </a>
   
   
     <a href="/2020/01/06/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/" id="article-nav-older" class="article-nav-link-wrap">
@@ -342,7 +356,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick-Start"><span class="toc-number">1.</span> <span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-a-new-post"><span class="toc-number">1.1.</span> <span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run-server"><span class="toc-number">1.2.</span> <span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate-static-files"><span class="toc-number">1.3.</span> <span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy-to-remote-sites"><span class="toc-number">1.4.</span> <span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#SpringMVC"><span class="toc-number">1.</span> <span class="toc-text">SpringMVC</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#SpringMVC工作流程"><span class="toc-number">1.0.1.</span> <span class="toc-text">SpringMVC工作流程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#一、-用户发送请求至前端控制器DispatcherServlet。"><span class="toc-number">1.0.1.1.</span> <span class="toc-text">一、  用户发送请求至前端控制器DispatcherServlet。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#二、-DispatcherServlet收到请求调用HandlerMapping处理器映射器。"><span class="toc-number">1.0.1.2.</span> <span class="toc-text">二、  DispatcherServlet收到请求调用HandlerMapping处理器映射器。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#三、-处理器映射器找到具体的处理器-可以根据xml配置、注解进行查找-，生成处理器对象及处理器拦截器-如果有则生成-一并返回给DispatcherServlet。"><span class="toc-number">1.0.1.3.</span> <span class="toc-text">三、   处理器映射器找到具体的处理器(可以根据xml配置、注解进行查找)，生成处理器对象及处理器拦截器(如果有则生成)一并返回给DispatcherServlet。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#四、-DispatcherServlet调用HandlerAdapter处理器适配器。"><span class="toc-number">1.0.1.4.</span> <span class="toc-text">四、  DispatcherServlet调用HandlerAdapter处理器适配器。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#五、-HandlerAdapter经过适配调用具体的处理器-Controller，也叫后端控制器-。"><span class="toc-number">1.0.1.5.</span> <span class="toc-text">五、  HandlerAdapter经过适配调用具体的处理器(Controller，也叫后端控制器)。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#六、-Controller执行完成返回ModelAndView。"><span class="toc-number">1.0.1.6.</span> <span class="toc-text">六、  Controller执行完成返回ModelAndView。</span></a></li></ol></li></ol></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -425,25 +439,17 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
       
       
     
-      
-      
-      
-    
     
 
     <ul style="width: 70%">
     
     
       
-      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'innerArchive')"><a href="javascript:void(0)" q-class="active:innerArchive">所有文章</a></li>
+      <li style="width: 50%" q-on="click: openSlider(e, 'innerArchive')"><a href="javascript:void(0)" q-class="active:innerArchive">所有文章</a></li>
       
         
       
-      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'friends')"><a href="javascript:void(0)" q-class="active:friends">友链</a></li>
-      
-        
-      
-      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'aboutme')"><a href="javascript:void(0)" q-class="active:aboutme">关于我</a></li>
+      <li style="width: 50%" q-on="click: openSlider(e, 'aboutme')"><a href="javascript:void(0)" q-class="active:aboutme">关于我</a></li>
       
         
     </ul>
@@ -510,38 +516,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
     	</section>
     
 
-    
-    	<section class="tools-section tools-section-friends" q-show="friends">
-  		
-        <ul class="search-ul">
-          
-            <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接1</a>
-            </li>
-          
-            <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接2</a>
-            </li>
-          
-            <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接3</a>
-            </li>
-          
-            <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接4</a>
-            </li>
-          
-            <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接5</a>
-            </li>
-          
-            <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接6</a>
-            </li>
-          
-        </ul>
-  		
-    	</section>
     
 
     
